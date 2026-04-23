@@ -1,0 +1,52 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --animate-fade-out: fade_out 4s ease-in-out forwards;
+}
+    @keyframes fade-out {
+        0%, 70% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    @keyframes bird-run {
+    0% {
+        transform: translateX(100vw) translateY(0);
+    }
+    25% {
+        transform: translateX(75vw) translateY(-10px);
+    }
+    50% {
+        transform: translateX(50vw) translateY(0);
+    }
+    75% {
+        transform: translateX(25vw) translateY(-10px);
+    }
+    100% {
+        transform: translateX(-100px) translateY(0);
+    }
+}
+
+html[data-theme="modern"] body {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+
+[data-theme="nature"] body {
+    background: linear-gradient(135deg, #d4fc79, #96e6a1);
+}
+
+
+[data-theme="sea"] body {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
