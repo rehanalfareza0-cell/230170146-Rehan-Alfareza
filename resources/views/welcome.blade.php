@@ -150,7 +150,7 @@
 
     <!-- FOOTER -->
     <footer class="footer footer-center p-5 text-xs">
-        <p>© 2026 Chirper - Built with Laravel</p>
+        <p>© 2026 Chirper - Built with Laravel By Rehan Alfareza (230170146)</p>
     </footer>
 
 </body>
