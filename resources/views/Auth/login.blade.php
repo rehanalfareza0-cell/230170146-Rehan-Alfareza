@@ -5,11 +5,9 @@
         <form method="POST" action="/login" class="space-y-3">
             @csrf
 
-            <input type="email" name="email" placeholder="Email"
-                class="input input-bordered w-full" required>
+            <input type="email" name="email" placeholder="Email" class="input input-bordered w-full" required>
 
-            <input type="password" name="password" placeholder="Password"
-                class="input input-bordered w-full" required>
+            <input type="password" name="password" placeholder="Password" class="input input-bordered w-full" required>
 
             <button class="btn btn-primary w-full">Sign In</button>
 
