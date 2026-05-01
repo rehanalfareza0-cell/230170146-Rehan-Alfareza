@@ -41,14 +41,13 @@
             </p>
         @endauth
 
-        {{-- LIST CHIRPS --}}
         <div class="mt-6 space-y-3">
             @forelse ($chirps as $chirp)
                 <div class="card bg-base-100 shadow p-4">
 
                     <div class="flex justify-between items-center">
                         <div>
-                            {{-- FIX: gunakan optional biar gak looping error --}}
+                        
                             <strong>{{ optional($chirp->user)->name ?? 'User' }}</strong>
 
                             <span class="text-sm text-gray-500">
