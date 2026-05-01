@@ -4,12 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ isset($title) ? $title : 'Chirper' }}</title>
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <title>{{ $title ?? 'Chirper' }}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -27,80 +24,58 @@
     });
 </script>
 
-<body class="min-h-screen flex flex-col font-sans">
+<body class="min-h-screen flex flex-col">
 
-    <nav class="navbar bg-transparent">
+    <nav class="navbar bg-base-100 shadow-sm">
+
         <div class="navbar-start">
 
             <div class="dropdown">
                 <label tabindex="0" class="btn btn-ghost text-xl cursor-pointer flex items-center gap-2">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-
-                    <span>🐦 Chirper</span>
-
+                    ☰ <span>🐦 Chirper</span>
                 </label>
 
-                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-56 p-2 shadow">
+                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box w-56 p-2 shadow z-[1]">
 
-                    <li>
-                        <a href="/welcome">Home</a>
-                    </li>
-
-                    <li>
-                        <a href="/dashboard">Dashboard</a>
-                    </li>
-
-                    <li>
-                        <a href="/about">About Us</a>
-                    </li>
+                    <li><a href="/welcome">Home</a></li>
+                    <li><a href="/dashboard">Dashboard</a></li>
+                    <li><a href="/about">About Us</a></li>
 
                     <li>
                         <details>
-                            <summary>Mode</summary>
+                            <summary>Theme</summary>
                             <ul>
-                                <li>
-                                    <a onclick="setTheme('light')">Light Mode</a>
-                                </li>
-                                <li>
-                                    <a onclick="setTheme('dark')">Dark Mode</a>
-                                </li>
-                                <li>
-                                    <a onclick="setTheme('modern')">Modern</a>
-                                </li>
-                                <li>
-                                    <a onclick="setTheme('nature')">Nature</a>
-                                </li>
-                                <li>
-                                    <a onclick="setTheme('sea')">Sea</a>
-                                </li>
+                                <li><a onclick="setTheme('light')">Light</a></li>
+                                <li><a onclick="setTheme('dark')">Dark</a></li>
+                                <li><a onclick="setTheme('modern')">Modern</a></li>
+                                <li><a onclick="setTheme('nature')">Nature</a></li>
+                                <li><a onclick="setTheme('sea')">Sea</a></li>
                             </ul>
                         </details>
-                    </li>
-
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-
-                    <li>
-                        <a href="#">Users</a>
                     </li>
 
                 </ul>
             </div>
 
         </div>
+
         <div class="navbar-end gap-2">
-            <a href="#" class="btn btn-ghost btn-sm">Sign In</a>
-            <a href="#" class="btn btn-primary btn-sm">Sign Up</a>
+            @auth
+                <span class="text-sm">{{ auth()->user()->name }}</span>
+
+                <form method="POST" action="/logout">
+                    @csrf
+                    <button class="btn btn-ghost btn-sm">Logout</button>
+                </form>
+            @else
+                <a href="/login" class="btn btn-ghost btn-sm">Login</a>
+                <a href="/register" class="btn btn-primary btn-sm">Register</a>
+            @endauth
         </div>
+
     </nav>
 
-    <main class="flex-1 container mx-auto px-4 py-8">
+    <main class="flex-1 container mx-auto p-4">
         {{ $slot }}
     </main>
 

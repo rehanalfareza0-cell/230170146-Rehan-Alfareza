@@ -44,6 +44,12 @@
         <p>No chirps yet. Be the first to chirp!</p>
     </div>
 
+    <footer class="footer footer-center p-5 bg-transparent text-base-content text-xs">
+        <div>
+            <p>© 2026 Chirper - Built with Laravel By Rehan Alfareza (230170146)</p>
+        </div>
+    </footer>
+
     </div>
 
     </div>

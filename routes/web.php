@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChirpController;
 
-Route::get('/', function () {
-    return redirect('/welcome');
-});
+Route::view('/about', 'about');
+
+Route::get('/', [ChirpController::class, 'index']);
+Route::get('/welcome', [ChirpController::class, 'index']);
 
 Route::middleware('guest')->group(function () {
     Route::view('/login', 'auth.login')->name('login');
@@ -17,11 +18,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-
-    Route::get('/welcome', [ChirpController::class, 'index']);
-
     Route::post('/chirps', [ChirpController::class, 'store']);
     Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy']);
-
     Route::post('/logout', [AuthController::class, 'logout']);
 });
