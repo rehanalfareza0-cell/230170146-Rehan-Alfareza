@@ -1,57 +1,67 @@
 <x-layout>
-    <x-slot:title>
-        Welcome
-    </x-slot:title>
+    <x-slot:title>Home</x-slot:title>
 
-    <div class="max-w-2xl mx-auto">
-
-        <div class="card-body items-center text-center">
-
-            <div class="text-5xl mb-2 animate-bounce">
-                🐦
-            </div>
-
-            <h1 class="text-4xl font-bold">
-                Hi, Welcome to Chirper!
-            </h1>
-
-            <p class="mt-2 text-base-content/70">
-                Share your thoughts with the world.
-            </p>
-
-        </div>
-    </div>
+    <div class="max-w-2xl mx-auto text-center">
+        <div class="text-5xl mb-2 animate-bounce">🐦</div>
+        <h1 class="text-4xl font-bold">Hi, Welcome to Chirper!</h1>
+        <p class="mt-2 text-base-content/70">Share your thoughts with the world.</p>
     </div>
 
-    <div class="mt-2">
+    <div class="mt-6 max-w-xl mx-auto">
+
         <h2 class="text-center text-2xl font-semibold mb-4">Latest Chirps</h2>
 
-        <div class="max-w-xl mx-auto mt-4">
+        <form method="POST" action="/chirps">
+            @csrf
 
-            <textarea class="textarea textarea-bordered w-full bg-base-100" placeholder="What's on your mind?" rows="3"></textarea>
+            @if ($errors->any())
+                <div class="alert alert-error mb-3">
+                    {{ $errors->first() }}
+                </div>
+            @endif
+
+            <textarea name="content"
+                class="textarea textarea-bordered w-full"
+                placeholder="What's on your mind?"
+                rows="3"></textarea>
 
             <div class="flex justify-end mt-2">
-                <button class="btn btn-primary btn-sm px-5 rounded-full">
+                <button class="btn btn-primary btn-sm">
                     Chirp
                 </button>
             </div>
+        </form>
 
+        <div class="mt-6 space-y-3">
+            @forelse ($chirps as $chirp)
+                <div class="card bg-base-100 shadow p-4">
+
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <strong>Anonymous</strong>
+
+                            <span class="text-sm text-gray-500">
+                                {{ $chirp->created_at->diffForHumans() }}
+                            </span>
+                        </div>
+
+                        {{-- DELETE tanpa auth --}}
+                        <form method="POST" action="/chirps/{{ $chirp->id }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-xs btn-error">Delete</button>
+                        </form>
+                    </div>
+
+                    <p class="mt-2">{{ $chirp->content }}</p>
+
+                </div>
+            @empty
+                <div class="text-center text-gray-500">
+                    Belum ada chirp.
+                </div>
+            @endforelse
         </div>
-    </div>
-
-    <div class="text-center mt-10 text-base-content/60">
-        <div class="text-4xl mb-2">💬</div>
-        <p>No chirps yet. Be the first to chirp!</p>
-    </div>
-
-    <footer class="footer footer-center p-5 bg-transparent text-base-content text-xs">
-        <div>
-            <p>© 2026 Chirper - Built with Laravel By Rehan Alfareza (230170146)</p>
-        </div>
-    </footer>
 
     </div>
-
-    </div>
-
 </x-layout>

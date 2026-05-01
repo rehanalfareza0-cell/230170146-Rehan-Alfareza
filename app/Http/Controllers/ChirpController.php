@@ -9,8 +9,8 @@ class ChirpController extends Controller
 {
     public function index()
     {
-        return view('welcome', [
-            'chirps' => Chirp::with('user')->latest()->get()
+        return view('welcome', [ // ✅ PASTIKAN INI
+            'chirps' => Chirp::latest()->get()
         ]);
     }
 
@@ -22,7 +22,6 @@ class ChirpController extends Controller
 
         Chirp::create([
             'content' => $request->content,
-            'user_id' => auth()->id()
         ]);
 
         return back();

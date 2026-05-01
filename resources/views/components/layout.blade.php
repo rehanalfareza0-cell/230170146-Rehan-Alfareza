@@ -60,17 +60,7 @@
         </div>
 
         <div class="navbar-end gap-2">
-            @auth
-                <span class="text-sm">{{ auth()->user()->name }}</span>
-
-                <form method="POST" action="/logout">
-                    @csrf
-                    <button class="btn btn-ghost btn-sm">Logout</button>
-                </form>
-            @else
-                <a href="/login" class="btn btn-ghost btn-sm">Login</a>
-                <a href="/register" class="btn btn-primary btn-sm">Register</a>
-            @endauth
+            <span class="text-sm">Guest</span>
         </div>
 
     </nav>
